@@ -2,3 +2,4 @@
 *.RData
 *.pdf
 *.png
+.Rproj.user
