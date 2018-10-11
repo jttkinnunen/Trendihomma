@@ -1,0 +1,16 @@
+export("anytime",
+       "anydate",
+       "getFormats",
+       "addFormats",
+       "utctime",
+       "utcdate",
+       "iso8601",
+       "rfc2822",
+       "rfc3339",
+       "yyyymmdd",
+       "assertDate",
+       "assertTime")
+importFrom("Rcpp", "evalCpp")
+importFrom("utils", "head")
+import("RApiDatetime")
+useDynLib(anytime, .registration=TRUE)

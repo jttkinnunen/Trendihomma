@@ -1,0 +1,8 @@
+RApiDatetime-package	RApiDatetime-package
+rapiAsPOSIXct	rapistrptime
+rapiAsPOSIXlt	rapistrptime
+rapiD2POSIXlt	rapistrptime
+RApiDatetime	RApiDatetime-package
+rapiFormatPOSIXlt	rapistrptime
+rapiPOSIXlt2D	rapistrptime
+rapistrptime	rapistrptime
