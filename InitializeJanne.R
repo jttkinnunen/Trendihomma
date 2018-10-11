@@ -27,8 +27,6 @@ if (!file.exists(my_data_dir)) {
 #api_key = "9raZ36FkYGFHDSNrW)gdsw((" TODO old file name edit out
 so_api_key = "Qa0f*SDU36j)7KMJbAu)Nw(("
 
-
-
 #** GETOLDTWEETS-JAVA PATH
 #** Set path to the directory for "GetOldTweets-java-master"
 getoldtweets_path = paste(getwd(),"/GetOldTweets-java-master", sep="")
