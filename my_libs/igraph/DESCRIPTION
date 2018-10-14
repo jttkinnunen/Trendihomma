@@ -37,5 +37,5 @@ NeedsCompilation: yes
 Packaged: 2018-07-27 08:53:48 UTC; gaborcsardi
 Repository: CRAN
 Date/Publication: 2018-07-27 14:50:02 UTC
-Built: R 3.5.1; i386-w64-mingw32; 2018-09-17 16:08:54 UTC; windows
+Built: R 3.4.4; i386-w64-mingw32; 2018-09-18 20:01:58 UTC; windows
 Archs: i386, x64

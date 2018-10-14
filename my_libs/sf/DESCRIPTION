@@ -38,18 +38,18 @@ RoxygenNote: 6.0.1
 Encoding: UTF-8
 NeedsCompilation: yes
 Packaged: 2018-05-17 16:18:15 UTC; edzer
-Author: Edzer Pebesma [aut, cre] (<https://orcid.org/0000-0001-8049-7069>>),
-  Roger Bivand [ctb] (<https://orcid.org/0000-0003-2392-6140>>),
+Author: Edzer Pebesma [aut, cre] (<https://orcid.org/0000-0001-8049-7069>),
+  Roger Bivand [ctb] (<https://orcid.org/0000-0003-2392-6140>),
   Etienne Racine [ctb],
   Michael Sumner [ctb],
   Ian Cook [ctb],
   Tim Keitt [ctb],
   Robin Lovelace [ctb],
   Hadley Wickham [ctb],
-  Jeroen Ooms [ctb] (<https://orcid.org/0000-0002-4035-0289>>),
+  Jeroen Ooms [ctb] (<https://orcid.org/0000-0002-4035-0289>),
   Kirill Müller [ctb]
 Maintainer: Edzer Pebesma <edzer.pebesma@uni-muenster.de>
 Repository: CRAN
-Date/Publication: 2018-05-17 21:47:50 UTC
-Built: R 3.5.1; x86_64-w64-mingw32; 2018-09-17 14:56:13 UTC; windows
+Date/Publication: 2018-05-17 23:47:58
+Built: R 3.4.4; x86_64-w64-mingw32; 2018-09-18 20:03:27 UTC; windows
 Archs: i386, x64

@@ -3,6 +3,9 @@
 #install.packages("magrittr", dependencies = TRUE)
 #install.packages("slam", dependencies = TRUE)
 #install.packages("Rmpfr", dependencies = TRUE)
+#install.packages("tokenizers",dependencies = TRUE)
+#install.packages("DEoptim",dependencies = TRUE)
+
 library(tm)
 #library(NLP)
 #library(magrittr)
@@ -16,13 +19,13 @@ library("tokenizers")
 #source ("mclapply.hack.R")
 
 #Set the file to be analyzed, e.g.
-my_file = "my_Scopus_TSE_articles_clean_data.RData"
+my_file = "my_Scopus_ta_data.RData"
 
 my_temp_file = paste(my_data_dir, "/", sep="")
 my_temp_file = paste(my_temp_file, my_file, sep="")
 load(my_temp_file)
 
-my_stopwords = c(stopwords::stopwords(language = "en", source = "snowball"),"myStopword1", "myStopword2")
+#my_stopwords = c(stopwords::stopwords(language = "en", source = "snowball"),"myStopword1", "myStopword2")
 
 #Articles with NA dates cause false analysis later kick them out
 my_articles <- my_articles[which(!is.na(my_articles$Date)),]
@@ -47,15 +50,22 @@ vectorizer = vocab_vectorizer(v)
 #create document-term matrix
 dtm = create_dtm(it, vectorizer, type = "dgTMatrix")
 
-# we create 10 topics 
-lda_model = LDA$new(n_topics = 10, doc_topic_prior = 0.1, topic_word_prior = 0.01)
-doc_topic_distr = lda_model$fit_transform(x = dtm, n_iter = 1000, 
-                          convergence_tol = 0.001, n_check_convergence = 25, 
-                          #convergence_tol = 0.01, n_check_convergence = 25, 
+# we create 10 topics
+#best n_topics = 173, doc_topic_prior = 0.2140233, topic_word_prior = 7.237319e-05
+#lda_model = LDA$new(n_topics = 90, doc_topic_prior = 0.1, topic_word_prior = 0.01)
+#10 394.3741 0.1586874 0.0007376762
+
+#$member$bestvalit
+#[1] 406.6452 290.6874 290.6874 290.6874 290.6874 262.2567 262.2567 262.2567 238.6970 182.1516
+
+lda_model = LDA$new(n_topics = 394, doc_topic_prior = 0.1586874, topic_word_prior = 0.0007376762)
+doc_topic_distr = lda_model$fit_transform(x = dtm, n_iter = 1000,
+                          convergence_tol = 0.001, n_check_convergence = 25,
+                          #convergence_tol = 0.01, n_check_convergence = 25,
                           progressbar = FALSE, verbose=FALSE)
 
 #apply to training set
-new_dtm = itoken(my_articles$Clean_Text[-sample], tolower, word_tokenizer) %>% 
+new_dtm = itoken(my_articles$Clean_Text[-sample], tolower, word_tokenizer) %>%
   create_dtm(vectorizer, type = "dgTMatrix")
 new_doc_topic_distr = lda_model$transform(new_dtm)
 perpperplexity_score <- perplexity(new_dtm, topic_word_distribution = lda_model$topic_word_distribution, doc_topic_distribution = new_doc_topic_distr)
@@ -69,7 +79,7 @@ lda_model$get_top_words(n = 7, topic_number = c(1:10), lambda = 0.3)
 #-----------------------------------------------------------------------------------
 #Finding optimal number of topics and hyperparameters can be done with genetic algorithm that performs meta-heuristic search (= not guaranteed
 # to find the best but relatively good). See for more detailshttps://cran.r-project.org/web/packages/DEoptim/index.html
-#Evaluate function optimalLda at the end of this file. Then 
+#Evaluate function optimalLda at the end of this file. Then
 
 
 
@@ -93,10 +103,10 @@ it <- itoken(tokens, progressbar = FALSE)
 v = create_vocabulary(it) %>% prune_vocabulary(term_count_min = 10, doc_proportion_max = 0.3)
 vectorizer = vocab_vectorizer(v)
 dtm = create_dtm(it, vectorizer, type = "dgTMatrix")
-lda_model = LDA$new(n_topics = 298, doc_topic_prior = 0.2518732, topic_word_prior = 0.005613016)
-doc_topic_distr = lda_model$fit_transform(x = dtm, n_iter = 1000, 
-                                          convergence_tol = 0.001, n_check_convergence = 25, 
-                                          #convergence_tol = 0.01, n_check_convergence = 25, 
+lda_model = LDA$new(n_topics = 173, doc_topic_prior = 0.2140233, topic_word_prior = 7.237319e-05)
+doc_topic_distr = lda_model$fit_transform(x = dtm, n_iter = 1000,
+                                          convergence_tol = 0.001, n_check_convergence = 25,
+                                          #convergence_tol = 0.01, n_check_convergence = 25,
                                           progressbar = FALSE, verbose=FALSE)
 #Save model for further analysis
 lda_file = getwd()
@@ -118,30 +128,30 @@ optimalLda <- function (x){
   m_k <- round (x[1])
   m_alpha <- x[2]
   m_beta <- x[3]
-  
+
   sample <- sample.int(n = nrow(my_articles), size = floor(.80*nrow(my_articles)), replace = F)
-  
+
   tokens = my_articles$Clean_Text [sample] %>%  tokenize_words (strip_numeric = TRUE)
   it <- itoken(tokens, progressbar = FALSE)
-  
-  v = create_vocabulary(it) %>% 
+
+  v = create_vocabulary(it) %>%
     prune_vocabulary(term_count_min = 10, doc_proportion_max = 0.1)
   vectorizer = vocab_vectorizer(v)
-  
+
   dtm = create_dtm(it, vectorizer, type = "dgTMatrix")
-  
-  #Find correct hyper parameters. 
+
+  #Find correct hyper parameters.
   lda_model = LDA$new(n_topics = m_k, doc_topic_prior = m_alpha, topic_word_prior = m_beta)
   #lda_model = LDA$new(n_topics = 100, doc_topic_prior = 0.1, topic_word_prior = 0.1)
 
-  doc_topic_distr = 
-    lda_model$fit_transform(x = dtm, n_iter = 1000, 
-                            #convergence_tol = 0.001, n_check_convergence = 25, 
-                            convergence_tol = 0.01, n_check_convergence = 25, 
+  doc_topic_distr =
+    lda_model$fit_transform(x = dtm, n_iter = 1000,
+                            #convergence_tol = 0.001, n_check_convergence = 25,
+                            convergence_tol = 0.01, n_check_convergence = 25,
                             progressbar = FALSE, verbose=FALSE)
-  
+
   #apply to training set
-  new_dtm = itoken(my_articles$Clean_Text[-sample], tolower, word_tokenizer) %>% 
+  new_dtm = itoken(my_articles$Clean_Text[-sample], tolower, word_tokenizer) %>%
     create_dtm(vectorizer, type = "dgTMatrix")
   new_doc_topic_distr = lda_model$transform(new_dtm)
   sink()

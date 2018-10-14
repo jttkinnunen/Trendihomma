@@ -1,0 +1,12 @@
+mallet-package	mallet-package
+mallet	mallet-package
+mallet.doc.topics	mallet.doc.topics
+mallet.import	mallet.import
+mallet.read.dir	mallet.read.dir
+mallet.subset.topic.words	mallet.subset.topic.words
+mallet.top.words	mallet.top.words
+mallet.topic.hclust	mallet.topic.hclust
+mallet.topic.labels	mallet.topic.labels
+mallet.topic.words	mallet.topic.words
+mallet.word.freqs	mallet.word.freqs
+MalletLDA	MalletLDA

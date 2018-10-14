@@ -1,0 +1,18 @@
+MalletLDA               Create a Mallet topic model trainer
+mallet-package          An R wrapper for the Mallet topic modeling
+                        package
+mallet.doc.topics       Retrieve a matrix of topic weights for every
+                        document
+mallet.import           Import text documents into Mallet format
+mallet.read.dir         Import documents from a directory into Mallet
+                        format
+mallet.subset.topic.words
+                        Estimate topic-word distributions from a
+                        sub-corpus
+mallet.top.words        Get the most probable words and their
+                        probabilities for one topic.
+mallet.topic.hclust     Return a hierarchical clustering of topics
+mallet.topic.labels     Get strings containing the most probable words
+                        for each topic
+mallet.topic.words      Retrieve a matrix of words weights for topics
+mallet.word.freqs       Descriptive statistics of word frequencies

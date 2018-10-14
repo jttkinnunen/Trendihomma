@@ -1,6 +1,6 @@
 
 #** CLEAN YOUR ENVIRONMENT
-#** You may want to clear your environment variables when starting a session. Saves from plenty of headache. 
+#** You may want to clear your environment variables when starting a session. Saves from plenty of headache.
 rm(list=ls())
 
 
@@ -19,7 +19,7 @@ if (!file.exists(my_data_dir)) {
 #** Set your own StackOverflow API key here (or use the default below)
 #** EDIT THE FOLLOWING LINE for your own API key
 #api_key = "9raZ36FkYGFHDSNrW)gdsw((" TODO old file name edit out
-so_api_key = "9raZ36FkYGFHDSNrW)gdsw(("
+so_api_key = "kN*rOg9tz*1FkrJPeQiGwg(("
 
 
 
@@ -37,6 +37,6 @@ getoldtweets_path = paste(getwd(),"/GetOldTweets-java-master", sep="")
 #install.packages("rscopus", dependencies = TRUE)
 library("rscopus")
 #set_api_key("<your-own-scopus-api-key>")
-#alternatively you may store it a personal file somewhere else. 
-source("C:/Users/mmantyla/Dropbox/Research - Publications/2017 Agile Book Chapter/Scripts/SetScopusApiKey.R") 
+#alternatively you may store it a personal file somewhere else.
+source("C:/Users/mmantyla/Dropbox/Research - Publications/2017 Agile Book Chapter/Scripts/SetScopusApiKey.R")
 
